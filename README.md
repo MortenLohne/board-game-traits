@@ -8,7 +8,7 @@ No implementations are provided in this crate.
 
 Count the total number of moves possible at n moves deep. Commonly called a [perf test](https://www.chessprogramming.org/Perft) and used to check the correctness of move generation: 
 
-````
+```rust
 pub fn perft<B: Board>(board: &mut B, depth: u16) -> u64 {
     if depth == 0 {
         1
@@ -26,11 +26,11 @@ pub fn perft<B: Board>(board: &mut B, depth: u16) -> u64 {
             .sum()
     }
 }
-````
+```
 
 The [Minimax algorithm](https://en.wikipedia.org/wiki/Minimax), running n plies ahead:
 
-````
+```rust
 fn minimax<B: EvalBoard>(board: &mut B, depth: u16) -> f32 {
     match board.game_result() {
         Some(GameResult::WhiteWin) => return 100.0,
@@ -61,4 +61,4 @@ fn minimax<B: EvalBoard>(board: &mut B, depth: u16) -> f32 {
     }
 }
 
-````
+```
