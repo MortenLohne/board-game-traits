@@ -8,8 +8,7 @@ use std::fmt;
 use self::Color::*;
 use std::hash;
 
-
-/// Represents a player's color
+/// Represents a player's color.
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
 pub enum Color {
     White = 0,
@@ -37,7 +36,7 @@ impl fmt::Display for Color {
 }
 
 impl Color {
-    /// Returns the color's discriminant. 0 for white, 1 for black
+    /// Returns the color's discriminant. 0 for white, 1 for black.
     /// # Examples
     /// ```rust
     /// assert_eq!(Color::White.disc(), 0);
@@ -105,15 +104,15 @@ pub trait Board {
 
     /// Returns the result if the game is decided, otherwise returns None.
     /// If the winning player always plays the last move (as in chess), implementations are allowed
-    /// to only return a win when the losing player is to move
+    /// to only return a win when the losing player is to move.
     fn game_result(&self) -> Option<GameResult>;
 }
 
 /// A game board that also includes a heuristic static evaluation function.
 /// Enables the use of many game-playing algorithms, such as minimax.
 pub trait EvalBoard : Board + PartialEq + Clone {
-    /// A fast, static evaluation of the current board position
-    /// Returns a number between -100 and 100, where 0.0 is a draw, positive number means better for white, and negative number means better for black
+    /// A fast, static evaluation of the current board position.
+    /// Returns a number between -100 and 100, where 0.0 is a draw, positive number means better for white, and negative number means better for black.
     fn static_eval(&self) -> f32;
 }
 
