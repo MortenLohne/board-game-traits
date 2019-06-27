@@ -1,1 +1,1 @@
-mod board;
+pub mod board;
