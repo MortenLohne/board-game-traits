@@ -3,10 +3,10 @@
 //! General game-agnostic tools and engines can be built on this module
 //! Represents any 2-player sequential, deterministic, perfect-information game. This includes many popular games such as chess, go, xiangqi, othello, connect four and tic-tac-toe.
 
-use std::ops;
-use std::fmt;
 use self::Color::*;
+use std::fmt;
 use std::hash;
+use std::ops;
 
 /// Represents a player's color.
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
@@ -24,10 +24,10 @@ impl ops::Not for Color {
             Black => White,
         }
     }
-} 
+}
 
 impl fmt::Display for Color {
-    fn fmt(&self, fmt : &mut fmt::Formatter) -> Result<(), fmt::Error> {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> Result<(), fmt::Error> {
         fmt.write_str(match *self {
             White => ("White"),
             Black => ("Black"),
@@ -110,20 +110,19 @@ pub trait Board {
 
 /// A game board that also includes a heuristic static evaluation function.
 /// Enables the use of many game-playing algorithms, such as minimax.
-pub trait EvalBoard : Board + PartialEq + Clone {
+pub trait EvalBoard: Board + PartialEq + Clone {
     /// A fast, static evaluation of the current board position.
     /// Returns a number between -100 and 100, where 0.0 is a draw, positive number means better for white, and negative number means better for black.
     fn static_eval(&self) -> f32;
 }
 
 /// An extended game representation, which includes many additional methods to help game-playing algorithms search more effectively.
-pub trait ExtendedBoard : EvalBoard {
-
+pub trait ExtendedBoard: EvalBoard {
     /// The type for a reverse null move
     type ReverseNullMove;
 
     /// A representation of the board that can be hashed. Can be Self, or unit if no hashing is desired.
-    type HashBoard : hash::Hash + Eq;
+    type HashBoard: hash::Hash + Eq;
 
     fn hash_board(&self) -> Self::HashBoard;
 
