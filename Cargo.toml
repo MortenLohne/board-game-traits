@@ -3,3 +3,4 @@ name = "board-game-traits"
 version = "0.1.0"
 authors = ["Morten Lohne"]
 license = "MIT"
+edition = "2018"
