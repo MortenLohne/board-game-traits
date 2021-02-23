@@ -4,3 +4,6 @@ version = "0.2.0"
 authors = ["Morten Lohne"]
 license = "MIT"
 edition = "2018"
+description = "Traits for abstract game position representations"
+repository = "https://github.com/MortenLohne/board-game-traits"
+documentation = "https://docs.rs/board-game-traits"
