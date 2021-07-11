@@ -18,6 +18,7 @@ pub enum Color {
 impl ops::Not for Color {
     type Output = Color;
 
+    #[inline]
     fn not(self) -> Self {
         match self {
             White => Black,
@@ -43,6 +44,7 @@ impl Color {
     /// assert_eq!(Color::White.disc(), 0);
     /// assert_eq!(Color::Black.disc(), 1);
     /// ```
+    #[inline]
     pub fn disc(self) -> usize {
         self as u16 as usize
     }
@@ -54,6 +56,7 @@ impl Color {
     /// assert_eq!(Color::White.multiplier(), 1);
     /// assert_eq!(Color::Black.multiplier(), -1);
     /// ```
+    #[inline]
     pub fn multiplier(self) -> isize {
         self as u16 as isize * -2 + 1
     }
@@ -69,6 +72,7 @@ pub enum GameResult {
 
 impl GameResult {
     /// Returns WhiteWin for white, BlackWin for black
+    #[inline]
     pub fn win_by(color: Color) -> Self {
         match color {
             White => Self::WhiteWin,
@@ -79,6 +83,7 @@ impl GameResult {
 
 impl ops::Not for GameResult {
     type Output = Self;
+    #[inline]
     fn not(self) -> Self {
         match self {
             GameResult::WhiteWin => GameResult::BlackWin,
