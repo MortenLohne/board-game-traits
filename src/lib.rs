@@ -67,6 +67,16 @@ pub enum GameResult {
     Draw,
 }
 
+impl GameResult {
+    /// Returns WhiteWin for white, BlackWin for black
+    pub fn win_by(color: Color) -> Self {
+        match color {
+            White => Self::WhiteWin,
+            Black => Self::BlackWin,
+        }
+    }
+}
+
 impl ops::Not for GameResult {
     type Output = Self;
     fn not(self) -> Self {
