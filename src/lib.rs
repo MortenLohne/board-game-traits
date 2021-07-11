@@ -62,9 +62,9 @@ impl Color {
 /// The result of a game after it has finished.
 #[derive(PartialEq, Eq, Clone, Debug, Copy)]
 pub enum GameResult {
-    WhiteWin,
-    BlackWin,
-    Draw,
+    WhiteWin = 0,
+    BlackWin = 1,
+    Draw = 2,
 }
 
 impl GameResult {
