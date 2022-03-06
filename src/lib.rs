@@ -112,8 +112,8 @@ pub trait Position: Sized {
     /// Returns the side to move for the current position.
     fn side_to_move(&self) -> Color;
 
-    /// Generates all legal moves for the side to move, and appends them to the provided vector.
-    fn generate_moves(&self, moves: &mut Vec<Self::Move>);
+    /// Generates all legal moves for the side to move, and extends the provided data structure with them.
+    fn generate_moves<E: Extend<Self::Move>>(&self, moves: &mut E);
 
     /// Plays a move in the position. Also returns an ReverseMove do take the move back.
     ///
