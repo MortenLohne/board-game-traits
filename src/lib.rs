@@ -94,14 +94,20 @@ impl ops::Not for GameResult {
 }
 
 /// The simplest abstract representation of a game position. Together, the provided methods encode all the rules of the game.
-pub trait Position {
+pub trait Position: Sized {
     /// The type for moves in the game.
     type Move: Eq + Clone + fmt::Debug;
     /// The type for a reverse move in the game.
     type ReverseMove;
+    /// Optional Settings when initializing the position.
+    type Settings: Default;
 
     /// Returns the starting position for the game. This function always produces identical values.
-    fn start_position() -> Self;
+    fn start_position() -> Self {
+        Self::start_position_with_settings(&Self::Settings::default())
+    }
+
+    fn start_position_with_settings(settings: &Self::Settings) -> Self;
 
     /// Returns the side to move for the current position.
     fn side_to_move(&self) -> Color;
