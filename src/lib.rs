@@ -107,6 +107,7 @@ pub trait Position: Sized {
         Self::start_position_with_settings(&Self::Settings::default())
     }
 
+    /// Returns the starting position for the game with the given settings.
     fn start_position_with_settings(settings: &Self::Settings) -> Self;
 
     /// Returns the side to move for the current position.
