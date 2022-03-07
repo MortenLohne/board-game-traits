@@ -103,6 +103,7 @@ pub trait Position: Sized {
     type Settings: Default;
 
     /// Returns the starting position for the game. This function always produces identical values.
+    #[inline]
     fn start_position() -> Self {
         Self::start_position_with_settings(&Self::Settings::default())
     }
