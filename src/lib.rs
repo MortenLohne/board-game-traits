@@ -30,8 +30,8 @@ impl ops::Not for Color {
 impl fmt::Display for Color {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> Result<(), fmt::Error> {
         fmt.write_str(match *self {
-            White => ("White"),
-            Black => ("Black"),
+            White => "White",
+            Black => "Black",
         })
     }
 }
@@ -117,6 +117,14 @@ pub trait Position: Sized {
     /// Generates all legal moves for the side to move, and extends the provided data structure with them.
     fn generate_moves<E: Extend<Self::Move>>(&self, moves: &mut E);
 
+    /// Checks if a move is legal in the current position.
+    /// Enables minimax algorithms to use the killer-move heuristic in their search.
+    fn move_is_legal(&self, mv: Self::Move) -> bool {
+        let mut moves = vec![];
+        self.generate_moves(&mut moves);
+        moves.contains(&mv)
+    }
+
     /// Plays a move in the position. Also returns an ReverseMove do take the move back.
     ///
     /// Doing and then undoing a move always restores the position to exactly the same state.
@@ -150,14 +158,6 @@ pub trait ExtendedPosition: EvalPosition {
     type HashPosition: hash::Hash + Eq;
 
     fn hash_position(&self) -> Self::HashPosition;
-
-    /// Checks if a move is legal in the current position.
-    /// Enables minimax algorithms to use the killer-move heuristic in their search.
-    fn move_is_legal(&self, mv: Self::Move) -> bool {
-        let mut moves = vec![];
-        self.generate_moves(&mut moves);
-        moves.contains(&mv)
-    }
 
     /// Generates only the "active" moves in a position, and appends them to the provided vector. These are moves that radically change the static evaluation of a position, e.g. captures or promotions in chess.
     /// Search algorithms may recursively search all active moves, so eventually, no moves will be appended.
